@@ -26,7 +26,7 @@ public class BlogController {
     }
 
     @RequestMapping(value="/posts/{id}", method = RequestMethod.GET)
-    public ModelAndView getPostsDetails(@PathVariable Long id){
+    public ModelAndView getPostDetails(@PathVariable Long id){
         ModelAndView mv = new ModelAndView("postDetails");
         Post post = service.findById(id);
         mv.addObject("post",post);
