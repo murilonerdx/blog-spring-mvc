@@ -19,21 +19,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers(AUTH_LIST).permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().permitAll()
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+
+        http.headers().frameOptions().disable();
+        http.csrf().disable();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.inMemoryAuthentication()
-                .withUser("murilo").password("murilo@123").roles("ADMIN");
+                .withUser("admin").roles("ADMIN").password("{noop}password");
     }
     @Override
     public void configure(WebSecurity web) throws Exception{
         web.ignoring().antMatchers("/bootstrap/**");
     }
+
 }

@@ -22,7 +22,7 @@ public class BlogController {
     @Autowired
     BlogService service;
 
-    @RequestMapping(value="/posts", method = RequestMethod.GET)
+    @RequestMapping(value={"/posts", "/"}, method = RequestMethod.GET)
     public ModelAndView getPosts(){
         ModelAndView mv = new ModelAndView("posts");
         List<Post> posts = service.findAll();
